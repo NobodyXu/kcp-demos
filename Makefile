@@ -9,8 +9,9 @@ CXXFLAGS := -fno-exceptions -fno-rtti
 LDFLAGS = -Wl,-icf=all,--gc-sections -flto -Wl,--plugin-opt=O3 -fuse-ld=lld
 
 ## Objects to build
-SRCS := $(wildcard */*.c)
-OUTS := $(SRCS:.c=.out)
+C_SRCS := $(shell find . -name '*.c' -a ! -wholename './kcp/*')
+CXX_SRCS := $(shell find . -name '*.cc' -a ! -wholename './kcp/*')
+OUTS := $(C_SRCS:.c=.out) $(CXX_SRCS:.cc=.out)
 
 ## Build rules
 all: $(OUTS)
