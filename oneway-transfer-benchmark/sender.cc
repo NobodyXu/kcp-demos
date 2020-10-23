@@ -137,9 +137,6 @@ int main(int argc, char* argv[])
     ikcp_update(kcp, getUnixTimestamp());
     ikcp_flush(kcp);
 
-    while (ikcp_waitsnd(kcp) != 0)
-        ikcp_update(kcp, getUnixTimestamp());
-
     puts("Done sending data\n\n");
     ikcp_release(kcp);
 
