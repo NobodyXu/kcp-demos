@@ -16,16 +16,16 @@ OUTS := $(C_SRCS:.c=.out) $(CXX_SRCS:.cc=.out)
 ## Build rules
 all: $(OUTS)
 
-%.out: %.c kcp/ikcp.o kcp/ikcp.h Makefile
-	$(CC) -std=c11 $(CFLAGS) -o $@ $< kcp/ikcp.o
+%.out: %.c ikcp.o kcp/ikcp.h Makefile
+	$(CC) -std=c11 $(CFLAGS) -o $@ $< ikcp.o
 
-%.out: %.cc kcp/ikcp.o kcp/ikcp.h Makefile
-	$(CXX) -std=c++17 $(CXXFLAGS) $(CFLAGS) -o $@ $< kcp/ikcp.o
+%.out: %.cc ikcp.o kcp/ikcp.h Makefile
+	$(CXX) -std=c++17 $(CXXFLAGS) $(CFLAGS) -o $@ $< ikcp.o
 
 ### Special rule for kcp/ikcp.o
-kcp/ikcp.o: kcp/ikcp.c kcp/ikcp.h
+ikcp.o: kcp/ikcp.c kcp/ikcp.h
 	$(CC) -std=c11 -c $(CFLAGS) -o $@ $<
 
 clean:
-	rm -f $(OUTS) kcp/ikcp.o
+	rm -f $(OUTS) ikcp.o
 .PHONY: clean
